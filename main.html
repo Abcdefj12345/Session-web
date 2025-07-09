@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="si">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        
         :root {
-            --primary-red:  #FF0000;
-            --primary-dark: #000000;
-            --primary-light:  #FF0000;
-            --accent-gold:  #FF0000;
-            --glow-red: rgba(0, 0, 0, 0.6);
-            --glow-dark: rgba(0, 0, 0, 0.7);
+            --my-red: #ff1a1a;
+            --my-dark: #000000;
+            --my-light-red: #ff4d4d;
+            --my-gold: #ff9999;
+            --my-glow: rgba(255, 26, 26, 0.6);
         }
 
+        
         * {
             margin: 0;
             padding: 0;
@@ -23,391 +24,478 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        
         body {
-            background-color: var(--primary-dark);
+            background-color: var(--my-dark);
             color: white;
             min-height: 100vh;
-            overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated Background */
-        .animated-bg {
+        
+        .bg-layer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, 
-                var(--primary-dark), 
-                var(--glow-dark),
-                var(--primary-dark));
-            overflow: hidden;
+            background: linear-gradient(45deg, var(--my-dark), #111111, var(--my-dark));
+            z-index: 0;
         }
 
-        .red-particle {
+
+        .spark-effect {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: var(--primary-red);
+            width: 6px;
+            height: 6px;
+            background-color: var(--my-red);
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px var(--primary-red);
-            animation: float 15s linear infinite;
-            opacity: 0.7;
+            box-shadow: 0 0 12px var(--my-red);
+            animation: sparkMove 10s ease-in-out infinite;  
         }
 
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate(100vw, -100vh) scale(1.2);
-                opacity: 0;
-            }
+        @keyframes sparkMove {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translate(80vw, -80vh) scale(1.5); opacity: 0; }
         }
 
-        .electric-pulse {
+        
+        .pulse-wave {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, 
-                rgba(255, 0, 0, 0.05) 0%, 
-                transparent 70%);
-            animation: pulse 8s infinite alternate;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.08), transparent 60%);
+            animation: wavePulse 10s infinite; /* 10-second animation */
             z-index: -1;
         }
 
-        @keyframes pulse {
-            0% {
-                opacity: 0.1;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 0.3;
-                transform: scale(1.2);
-            }
+        @keyframes wavePulse {
+            0% { opacity: 0.1; transform: scale(0.7); }
+            100% { opacity: 0.4; transform: scale(1.3); }
         }
 
-        .container {
+      
+        .main-wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 25px;
             position: relative;
             z-index: 1;
         }
 
-        header {
+       
+        .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 0;
-            margin-bottom: 40px;
+            padding: 35px 0;
+            margin-bottom: 45px;
         }
 
-        .logo {
+        .brand-logo {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
 
-        .logo-image {
+        .logo-img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-red);
-            transition: all 0.5s ease;
+            border: 4px solid var(--my-red);
+            transition: all 0.5s;
         }
 
-        .logo-image:hover {
-            animation: none;
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 40px var(--primary-red);
+        .logo-img:hover {
+            transform: scale(1.15) rotate(15deg);
+            box-shadow: 0 0 45px var(--my-red);
         }
 
-        .logo-text h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(to right, var(--primary-red), var(--accent-gold));
+        .brand-text h1 {
+            font-size: 2.3rem;
+            background: linear-gradient(to right, var(--my-red), var(--my-gold));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-            animation: textGlow 2s infinite alternate;
+            text-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
         }
 
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.6);
-            }
-        }
-
-        .logo-text span {
-            font-size: 1rem;
-            color: var(--primary-light);
-            letter-spacing: 1px;
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 15px;
-            border: 2px solid var(--primary-red);
-            box-shadow: 
-                0 0 15px var(--primary-red),
-                inset 0 0 15px var(--primary-red);
-            margin-bottom: 40px;
-            animation: contentGlow 4s infinite alternate;
-        }
-
-        @keyframes contentGlow {
-            0% {
-                box-shadow: 0 0 15px var(--primary-red), inset 0 0 15px var(--primary-red);
-                border-color: var(--primary-red);
-            }
-            100% {
-                box-shadow: 0 0 30px var(--primary-red), inset 0 0 30px var(--primary-red);
-                border-color: var(--accent-gold);
-            }
-        }
-
-        .feature-image {
-            max-width: 100%;
-            height: auto;
-            max-height: 400px;
-            border-radius: 10px;
-            border: 3px solid var(--primary-red);
-            box-shadow: 0 0 20px var(--primary-red);
-            margin-bottom: 30px;
-            transition: all 0.5s ease;
-        }
-
-        .feature-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px var(--primary-red);
-        }
-    
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--primary-light);
-            text-shadow: 0 0 10px var(--glow-red);
-        }
-
-        p {
+        .brand-text span {
             font-size: 1.1rem;
-            margin-bottom: 30px;
-            max-width: 800px;
-            line-height: 1.6;
+            color: var(--my-light-red);
+            letter-spacing: 1.5px;
         }
 
-        .button-group {
+        .content-box {
+            text-align: center;
+            padding: 45px 25px;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 18px;
+            border: 2px solid var(--my-red);
+            box-shadow: 0 0 18px var(--my-red);
+            margin-bottom: 45px;
+        }
+
+        .feature-pic {
+            max-width: 100%;
+            max-height: 450px;
+            border-radius: 12px;
+            border: 3px solid var(--my-red);
+            box-shadow: 0 0 25px var(--my-red);
+            margin-bottom: 35px;
+            transition: all 0.5s;
+        }
+
+        .feature-pic:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 50px var(--my-red);
+        }
+
+        .content-box h2 {
+            font-size: 2.1rem;
+            margin-bottom: 25px;
+            color: var(--my-light-red);
+            text-shadow: 0 0 12px var(--my-glow);
+        }
+
+        .content-box p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            max-width: 850px;
+            line-height: 1.7;
+        }
+
+        /* Button Group */
+        .btn-group {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 18px;
+            margin-top: 25px;
         }
 
-        .btn {
-            padding: 12px 30px;
-            border-radius: 50px;
+        .custom-btn {
+            padding: 14px 35px;
+            border-radius: 55px;
             color: white;
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+            gap: 12px;
+            transition: all 0.4s;
             border: 2px solid transparent;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
 
-        .btn::before {
+        .custom-btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: -120%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.6s ease;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.7s;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        .custom-btn:hover::before {
+            left: 120%;
         }
 
-        .btn-download {
-            background: linear-gradient(to right, var(--primary-red), #000000);
-            border-color: var(--primary-red);
+        .download-btn {
+            background: linear-gradient(to right, var(--my-red), var(--my-dark));
+            border-color: var(--my-red);
         }
 
-        .btn-pair {
-            background: linear-gradient(to right, #000, #222);
-            border-color: var(--accent-gold);
+        .pair-btn {
+            background: linear-gradient(to right, var(--my-dark), #333);
+            border-color: var(--my-gold);
         }
 
-        .btn-github {
-            background: linear-gradient(to right, #000, #222);
-            border-color: var(--accent-gold);
-        }
-        
-         .btn-heroku {
-            background: linear-gradient(to right, #000, #222);
-            border-color: var(--accent-gold);
+        .contact-btn {
+            background: linear-gradient(to right, var(--my-dark), #333);
+            border-color: var(--my-gold);
         }
 
-        .btn-contact {
-            background: linear-gradient(to right, #000, #222);
-            border-color: var(--accent-gold);
+        .github-btn {
+            background: linear-gradient(to right, var(--my-dark), #333);
+            border-color: var(--my-gold);
         }
 
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-            border-color: var(--accent-gold);
+        .heroku-btn {
+            background: linear-gradient(to right, var(--my-dark), #333);
+            border-color: var(--my-gold);
         }
 
-        footer {
+        .custom-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+            border-color: var(--my-gold);
+        }
+
+
+        .footer-section {
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
+            padding: 35px;
+            margin-top: 55px;
+        }
+
+        .feedback-area {
+            margin: 45px auto;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 18px;
+            border: 2px solid var(--my-red);
+            box-shadow: 0 0 18px var(--my-red);
+            padding: 25px;
+        }
+
+        .input-field {
+            margin-bottom: 18px;
+        }
+
+        .user-name, .user-comment {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: rgba(255, 26, 26, 0.25);
+            border: 2px solid var(--my-red);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.4s;
+        }
+
+        .user-name:focus, .user-comment:focus {
+            border-color: var(--my-gold);
+            background: rgba(255, 26, 26, 0.35);
+            box-shadow: 0 0 12px var(--my-red);
+        }
+
+        .user-comment {
+            height: 130px;
+            resize: none;
+        }
+
+        .post-comment {
+            background: linear-gradient(45deg, var(--my-red), var(--my-gold));
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.4s;
+        }
+
+        .post-comment:hover {
+            transform: scale(1.07);
+            box-shadow: 0 6px 18px rgba(255, 26, 26, 0.6);
+        }
+
+        .comment-list {
+            margin-top: 30px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 12px;
+        }
+
+        .user-comment-box {
+            background: rgba(255, 26, 26, 0.35);
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border-left: 5px solid var(--my-red);
+            position: relative;
+        }
+
+        .user-comment-box .comment-author {
+            color: var(--my-gold);
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .user-comment-box .comment-time {
+            font-size: 13px;
+            color: #ffcccc;
+            margin-bottom: 10px;
+        }
+
+        .user-comment-box p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .remove-comment {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff6666;
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .user-comment-box:hover .remove-comment {
+            display: block;
+        }
+
+        .remove-comment:hover {
+            background: #ff4444;
         }
 
         @media (max-width: 768px) {
-            header {
+            .top-header {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
             }
-            
-            .logo-image {
+            .logo-img {
                 width: 70px;
                 height: 70px;
             }
-            
-            .logo-text h1 {
-                font-size: 1.8rem;
+            .brand-text h1 {
+                font-size: 1.9rem;
             }
-            
-            .button-group {
+            .btn-group {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .btn {
+            .custom-btn {
                 width: 100%;
-                max-width: 280px;
-                justify-content: center;
+                max-width: 300px;
+            }
+            .feedback-area {
+                padding: 18px;
             }
         }
     </style>
-    
 </head>
 <body>
-    <!-- Animated Background Elements -->
-    <div class="animated-bg" id="animated-bg"></div>
-    <div class="electric-pulse"></div>
-    
-    <div class="container">
-        <header>
-            <div class="logo">
-                <img src="https://i.ibb.co/7N087ZHh/Queen-Rashu-Md.jpg" alt="Queen Rashu Md Logo" class="logo-image">
-                <div class="logo-text">
-                    <h1>𝐐𝐔𝐄𝐄𝐍-𝐑𝐀𝐒𝐇𝐔-𝐌𝐃-𝐕2</h1>
-                    <span>Sri Lanka Best Whatsapp Bot</span>
+    <div class="bg-layer"></div>
+    <div class="pulse-wave"></div>
+
+    <div class="main-wrapper">
+        <header class="top-header">
+            <div class="brand-logo">
+                <img src="https://files.catbox.moe/cpu3eu.jpg" alt="QUEEN RASHU MD Logo" class="logo-img">
+                <div class="brand-text">
+                    <h1>𝐐╂𝐍-𝐑𝐀𝐒𝐇𝐔-𝐌𝐃</h1>
+                    <span>Sri Lanka's Top WhatsApp Bot</span>
                 </div>
             </div>
-            
         </header>
 
-        <main class="main-content">
-            <img src="https://i.ibb.co/7N087ZHh/Queen-Rashu-Md.jpg" alt="Rashu-Md Feature" class="feature-image">
-            
-            <h2>𝐐𝐮𝐞𝐞𝐧 𝐑𝐚𝐬𝐡𝐮 𝐌𝐝 Whatsapp Bot Developer By Nipun Harshana</h2>
-            <p>Queen Rashu Md is a fast, easy-to-use, and highly efficient MultiDevice WhatsApp Bot.</p>
-            
-            <div class="button-group">
-                <a href="https://www.mediafire.com/file/rpj8619o5dllmln/rashu-MD.zip/file" class="btn btn-download">
-                    <i class="fas fa-download"></i> DAWNLOAD ZIP
+        <main class="content-box">
+            <img src="https://files.catbox.moe/cpu3eu.jpg" alt="QUEEN RASHU MD Feature" class="feature-pic">
+            <h2>𝗤𝗨𝗘𝗘𝗡 𝗥𝗔𝗦𝗛𝗨 𝗠𝗗 - Crafted by Nipun</h2>
+            <p>QUEEN RASHU MD is a swift, user-friendly, and powerful multi-device WhatsApp bot.</p>
+            <div class="btn-group">
+                <a href="https://www.mediafire.com/file/rpj8619o5dllmln/rashu-MD.zip/file" class="custom-btn download-btn">
+                    <i class="fas fa-download"></i> Get It Now
                 </a>
-                
-                <a href="/pair" class="btn btn-pair">
-                    <i class="fas fa-link"></i> PAIR CODE
+                <a href="/pair" class="custom-btn pair-btn">
+                    <i class="fas fa-link"></i> Pair Code
                 </a>
-               
-                <a href="https://wa.me/94727319036" target="_blank" class="btn btn-contact">
-                    <i class="fas fa-headset"></i> CONTACT OWNER
+                <a href="https://wa.me/94727319036" target="_blank" class="custom-btn contact-btn">
+                    <i class="fas fa-headset"></i> Reach Owner
                 </a>
-                
-                <a href="https://github.com/CyberRushModz0/Queen-Rashu-Md-V2-update" target="_blank" class="btn btn-github">
-                    <i class="fab fa-github"></i> GITHUB
+                <a href="https://github.com/newhukanaputha/KARI-RASHU-NEW-UPDATE" target="_blank" class="custom-btn github-btn">
+                    <i class="fab fa-github"></i> GitHub Repo
                 </a>
-
-                <a href="https://queen-rashu-md-free-web-c0b5b6e5c761.herokuapp.com/" target="_blank" class="btn btn-github">
-                    <i class="fab fa-github"></i> FREE WEB
+                <a href="https://dashboard.heroku.com/new?template=https://github.com/newhukanaputha/KARI-RASHU-NEW-UPDATE" target="_blank" class="custom-btn heroku-btn">
+                    <i class="fas fa-power-off"></i> Heroku Deploy
                 </a>
-                
-                <a href="https://dashboard.heroku.com/new?template=https://github.com/CyberRushModz0/Queen-Rashu-Md-V2-update" target="_blank" class="btn btn-heroku">
-                    <i class="fas fa-power-off"></i> HEROKU
-                </a>
-                
             </div>
- 
         </main>
 
-        <footer>
-            <p>&copy; QUEEN RASHU MD </p>
+        <div class="feedback-area">
+            <div class="input-field">
+                <input type="text" class="user-name" placeholder="Your Name" required>
+                <textarea class="user-comment" placeholder="Leave your feedback..." required></textarea>
+                <button class="post-comment">Submit Feedback</button>
+            </div>
+            <div class="comment-list" id="comment-list"></div>
+        </div>
+
+        <footer class="footer-section">
+            <p>© QUEEN RASHU MD 2025</p>
         </footer>
     </div>
 
     <script>
-        // Create red particles for background
-        function createParticles(count) {
-            const container = document.getElementById('animated-bg');
-            
+       
+        function addSparks(count) {
+            const bgLayer = document.querySelector('.bg-layer');
             for (let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'red-particle';
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // Random size
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random animation duration
-                const duration = Math.random() * 10 + 15;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                container.appendChild(particle);
+                const spark = document.createElement('div');
+                spark.className = 'spark-effect';
+                spark.style.left = Math.random() * 100 + '%';
+                spark.style.top = Math.random() * 100 + '%';
+                spark.style.width = Math.random() * 5 + 4 + 'px';
+                spark.style.height = spark.style.width;
+                spark.style.animationDuration = Math.random() * 8 + 10 + 's';
+                spark.style.animationDelay = Math.random() * 6 + 's';
+                bgLayer.appendChild(spark);
             }
         }
+        addSparks(25);
 
-        // Initialize particles
-        createParticles(30);
+       
+        function showComments() {
+            const savedComments = JSON.parse(localStorage.getItem('userFeedback')) || [];
+            const commentArea = document.getElementById('comment-list');
+            commentArea.innerHTML = '';
+            savedComments.forEach(feedback => {
+                const newFeedback = document.createElement('div');
+                newFeedback.className = 'user-comment-box';
+                newFeedback.innerHTML = `
+                    <div class="comment-author">${feedback.name}</div>
+                    <div class="comment-time">${feedback.time}</div>
+                    <p>${feedback.text}</p>
+                    <button class="remove-comment">Remove</button>
+                `;
+                commentArea.appendChild(newFeedback);
+
+                const removeBtn = newFeedback.querySelector('.remove-comment');
+                removeBtn.addEventListener('click', function() {
+                    if (feedback.name === 'Admin') {
+                        commentArea.removeChild(newFeedback);
+                        const updatedFeedback = savedComments.filter(f => f.time !== feedback.time);
+                        localStorage.setItem('userFeedback', JSON.stringify(updatedFeedback));
+                    }
+                });
+            });
+        }
+
+        
+        document.querySelector('.post-comment').addEventListener('click', function() {
+            const name = document.querySelector('.user-name').value;
+            const comment = document.querySelector('.user-comment').value;
+            if (name && comment) {
+                const newFeedback = {
+                    name: name,
+                    text: comment,
+                    time: new Date().toLocaleString('en-US', { timeZone: 'Asia/Colombo' })
+                };
+                let feedbackList = JSON.parse(localStorage.getItem('userFeedback')) || [];
+                feedbackList.push(newFeedback);
+                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+                showComments();
+                document.querySelector('.user-name').value = '';
+                document.querySelector('.user-comment').value = '';
+            }
+        });
+
+        
+        window.onload = showComments;
     </script>
 </body>
 </html>
